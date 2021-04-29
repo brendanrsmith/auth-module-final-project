@@ -8,13 +8,13 @@ module.exports = async (req, res, next) => {
 
     if (!req.headers.authorization) { _authError() }
 
-    const token = req.headers.authorization.split(' ').pop;
+    const token = req.headers.authorization.split(' ').pop();
     const validUser = await users.authenticateBearer(token);
 
     req.user = validUser;
     req.token = validUser.token;
     next();
-  
+
   } catch (e) {
     _authError;
   }

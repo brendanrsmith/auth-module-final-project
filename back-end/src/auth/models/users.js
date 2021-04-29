@@ -38,12 +38,12 @@ users.pre('save', async function () {
 users.statics.authenticateBasic = async function (username, password) {
   const user = await this.findOne({ username });
   const valid = await bcrypt.compare(password, user.password);
-  if (valid) {return user; }
+  if (valid) { return user; }
   throw new Error('Invalid User');
 }
 
 //  ====== BEARER AUTH ======
-user.statics.authenticateBearer = async function (token) {
+users.statics.authenticateBearer = async function (token) {
   try {
     const parsedToken = jwt.verify(token, process.env.SECRET);
     const user = this.findOne({ username: parsedToken.username });
