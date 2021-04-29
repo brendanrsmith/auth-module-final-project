@@ -11,13 +11,13 @@ const permissions = require('./middleware/acl.js');
 authRouter.post('/signup', async (req, res, next) => {
   try {
     let user = new User(req.body);
-    const userRecord = await(user.save());
+    const userRecord = await (user.save());
     const output = {
       user: userRecord,
       token: userRecord.token
     };
     // TODO redirect to HTML
-    res.status(201).json(output);
+    res.redirect("/signup");
   } catch (e) {
     next(e.message);
   }
@@ -29,7 +29,7 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     token: req.user.token
   };
   // TODO redirect to HTML
-  res.status(200).json(user);
+  res.redirect("/dashboard");
 });
 
 module.exports = authRouter;
