@@ -18,6 +18,7 @@ authRouter.post('/signup', async (req, res, next) => {
       user: userRecord,
       token: userRecord.token
     };
+    console.log(`inside user ${output.token}`);
     // TODO redirect to HTML
     res.json({
       status: "success",

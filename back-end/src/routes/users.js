@@ -28,6 +28,22 @@ users.get('/users/:id', cookieParser, capability('read'), async (req, res) => {
         const id = req.params.id;
         const user = await User.findOne({ _id: id });
         res.status(200).json(user);
+        res.send(user); //added this, Dan
+    }
+    catch {
+        res.status(500).json({ err: "Error Fetching User!" });
+    }
+
+})
+
+//Get All Users
+users.get('/users', cookieParser, capability('create'), async (req, res) => {
+
+    try {
+        const id = req.params.id;
+        const users = await User.map();
+        console.log(users);
+        res.status(200).json(users);
     }
     catch {
         res.status(500).json({ err: "Error Fetching User!" });
@@ -59,6 +75,7 @@ users.put('/users:/id', cookieParser, capability('update'), async (req, res) => 
 
         const user = await User.findByIdAndUpdate({ _id: id }, updateObj, { new: true });
         res.status(200).json(user);
+        res.render(user);
     }
     catch {
         res.status(500).json({ err: "Error Updating User!" });
