@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,17 +9,21 @@
   <link rel="stylesheet" href="style.css">
   <title>Sign In</title>
 </head>
+
 <body>
   <header>
     <h1>Sign In</h1>
   </header>
   <section>
-    <form class="form" action="">
-      <input id="userName" class="formField" type="text" name="username" placeholder="username">
-      <input id="password" class="formField" type="text" name="passowrd" placeholder="password">
-      <button class="button" href='dashboard.html'type="button">Sign In</button>
+    <form class="form" action="" id="signin" enctype="multipart/form-data">
+      <input id="username" class="formField" type="text" name="username" placeholder="username">
+      <input id="password" class="formField" type="text" name="password" placeholder="password">
+      <button class="button" href='dashboard.html' type="submit">Sign In</button>
     </form>
   </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
