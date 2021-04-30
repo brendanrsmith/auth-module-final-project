@@ -4,6 +4,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+
 
 //Internal files
 const notFound = require('./error-handlers/404.js');
@@ -16,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
-
+app.use(cookieParser());
 
 app.use(userRoutes);
 app.use(authRoutes);

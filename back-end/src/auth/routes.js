@@ -17,7 +17,7 @@ authRouter.post('/signup', async (req, res, next) => {
       token: userRecord.token
     };
     // TODO redirect to HTML
-    res.redirect("/signup");
+    res.redirect("/signin");
   } catch (e) {
     next(e.message);
   }
@@ -29,7 +29,13 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     token: req.user.token
   };
   // TODO redirect to HTML
-  res.redirect("/dashboard");
+  res.cookie('token', `${req.user.token}`, {
+    secure: true,
+    httpOnly: true
+  });
+  // res.redirect("/users");
+  // console.log(res.document.cookie);
+  res.send(user);
 });
 
 module.exports = authRouter;

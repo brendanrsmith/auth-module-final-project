@@ -5,12 +5,13 @@ const users = express.Router();
 const bearerAuth = require('../auth/middleware/bearer.js');
 const User = require('../auth/models/users.js');
 const capability = require(('../auth/middleware/acl.js'));
+const cookieParser = require('../auth/middleware/cookie.js');
 
 //add bearer and permission
 
 
 //Get All Users
-users.get('/users', bearerAuth, capability('read'), async (req, res) => {
+users.get('/users', bearerAuth, cookieParser, capability('read'), async (req, res) => {
 
     try {
         const users = await User.find({});
