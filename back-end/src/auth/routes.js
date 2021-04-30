@@ -8,34 +8,48 @@ const basicAuth = require('./middleware/basic.js');
 const bearerAuth = require('./middleware/bearer.js');
 const permissions = require('./middleware/acl.js');
 
+
 authRouter.post('/signup', async (req, res, next) => {
+
   try {
     let user = new User(req.body);
-    const userRecord = await (user.save());
+    const userRecord = await user.save();
     const output = {
       user: userRecord,
       token: userRecord.token
     };
     // TODO redirect to HTML
-    res.redirect("/signin");
+    res.json({
+      status: "success",
+      output
+    });
   } catch (e) {
     next(e.message);
   }
 });
 
 authRouter.post('/signin', basicAuth, (req, res, next) => {
-  const user = {
-    user: req.user,
-    token: req.user.token
-  };
-  // TODO redirect to HTML
-  res.cookie('token', `${req.user.token}`, {
-    secure: true,
-    httpOnly: true
-  });
-  // res.redirect("/users");
-  // console.log(res.document.cookie);
-  res.send(user);
+  try {
+    const user = {
+      user: req.user,
+      token: req.user.token
+    };
+    // TODO redirect to HTML
+    // res.redirect("/dashboard");
+    
+    res.cookie('token', `${req.user.token}`, {
+      secure: true,
+      httpOnly: true
+    });
+
+    res.json({
+      status: "success",
+      user
+    });
+
+  } catch (e) {
+    next(e.message);
+  }
 });
 
 module.exports = authRouter;
