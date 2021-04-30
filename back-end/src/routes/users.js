@@ -7,8 +7,6 @@ const capability = require(('../auth/middleware/acl.js'));
 const cookieParser = require('../auth/middleware/cookie.js');
 
 
-
-
 //Get All Users
 users.get('/users', cookieParser, capability('read'), async (req, res) => {
 
