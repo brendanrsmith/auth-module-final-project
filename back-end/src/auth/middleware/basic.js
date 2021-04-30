@@ -14,6 +14,7 @@ module.exports = async (req, res, next) => {
     req.user = await User.authenticateBasic(user, pass);
     next();
   } catch (e) {
+    console.log(e.message);
     _authError();
   }
 
