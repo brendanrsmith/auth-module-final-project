@@ -36,6 +36,14 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     };
     // TODO redirect to HTML
     // res.redirect("/dashboard");
+
+    
+    // Sets cookie "token" as user token
+    res.cookie('token', `${req.user.token}`, {
+      secure: true,
+      httpOnly: true
+    });
+
     res.json({
       status: "success",
       user
