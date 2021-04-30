@@ -2,16 +2,15 @@
 
 const express = require('express');
 const users = express.Router();
-const bearerAuth = require('../auth/middleware/bearer.js');
 const User = require('../auth/models/users.js');
 const capability = require(('../auth/middleware/acl.js'));
 const cookieParser = require('../auth/middleware/cookie.js');
 
-//add bearer and permission
+
 
 
 //Get All Users
-users.get('/users', bearerAuth, cookieParser, capability('read'), async (req, res) => {
+users.get('/users', cookieParser, capability('read'), async (req, res) => {
 
     try {
         const users = await User.find({});
@@ -23,7 +22,7 @@ users.get('/users', bearerAuth, cookieParser, capability('read'), async (req, re
 })
 
 //Get Single User
-users.get('/users/:id', bearerAuth, capability('read'), async (req, res) => {
+users.get('/users/:id', cookieParser, capability('read'), async (req, res) => {
 
     try {
         const id = req.params.id;
@@ -37,7 +36,7 @@ users.get('/users/:id', bearerAuth, capability('read'), async (req, res) => {
 })
 
 //Create New User
-users.post('/users', bearerAuth, capability('create'), async (req, res) => {
+users.post('/users', cookieParser, capability('create'), async (req, res) => {
 
     try {
         const newUser = new User(req.body);
@@ -52,7 +51,7 @@ users.post('/users', bearerAuth, capability('create'), async (req, res) => {
 })
 
 //Update user
-users.put('/users:/id', bearerAuth, capability('update'), async (req, res) => {
+users.put('/users:/id', cookieParser, capability('update'), async (req, res) => {
 
     try {
         const id = req.params.id;
@@ -67,7 +66,7 @@ users.put('/users:/id', bearerAuth, capability('update'), async (req, res) => {
 })
 
 //Delete user
-users.delete('/users:/id', bearerAuth, capability('delete'), async (req, res) => {
+users.delete('/users:/id', cookieParser, capability('delete'), async (req, res) => {
 
     try {
         const id = req.params.id;

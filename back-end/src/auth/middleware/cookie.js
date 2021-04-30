@@ -6,14 +6,13 @@ module.exports = async (req, res, next) => {
 
   try {
 
-    if (req.cookies.token) { _authError() }
+    if (!req.cookies.token) { _authError() }
 
     const token = req.cookies.token;
-    console.log(token);
     const validUser = await users.authenticateBearer(token);
 
-    req.user = validUser;
-    req.token = validUser.token;
+    // req.user = validUser;
+    // req.token = validUser.token;
     next();
 
   } catch (e) {
@@ -21,6 +20,6 @@ module.exports = async (req, res, next) => {
   }
 
   function _authError() {
-    next('Invalid Login');
+    next('Invalid Login!!!!!!');
   }
 }
