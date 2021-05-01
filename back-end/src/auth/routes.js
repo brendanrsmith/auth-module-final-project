@@ -9,7 +9,7 @@ const bearerAuth = require('./middleware/bearer.js');
 const permissions = require('./middleware/acl.js');
 
 authRouter.post('/signup', async (req, res, next) => {
-
+  console.log('this is the request', req.body);
   try {
     let user = new User(req.body);
     const userRecord = await user.save();
@@ -17,7 +17,7 @@ authRouter.post('/signup', async (req, res, next) => {
       user: userRecord,
       token: userRecord.token
     };
-
+    console.log(`this is the output ${output}`);
     res.json({
       status: "success",
       output

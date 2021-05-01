@@ -14,12 +14,12 @@ $("#signup").on("submit", function (e) {
     }
 
     $.ajax({
-        url: "http://localhost:3000/signup",
+        url: "http://localhost:3333/signup",
         type: "POST",
         data: userObj,
     }).done(function (response) {
         if (response.status === "success") {
-            window.location.href = "/signin"
+            window.location.href = "/front-end/signin.html"
         }
     })
 })
@@ -35,14 +35,14 @@ $("#signin").on("submit", function (e) {
     const encoded = btoa(`${username}:${password}`);
 
     $.ajax({
-        url: "http://localhost:3000/signin",
+        url: "http://localhost:3333/signin",
         headers: {
             authorization: `Basic ${encoded}`
         },
         type: "POST",
     }).done(function (response) {
         if (response.status === "success") {
-            window.location.href = "/dashboard"
+            window.location.href = "/front-end/dashboard.html"
         }
 
     })

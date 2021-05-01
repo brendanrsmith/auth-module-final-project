@@ -2,6 +2,7 @@
 
 const express = require('express');
 const pages = express.Router();
+const bearerAuth = require('../auth/middleware/bearer.js')
 
 const path = require('path');
 const clientPath = path.join(__dirname + "../../../../front-end");
@@ -14,7 +15,7 @@ pages.get('/signin', (req, res) => {
     res.sendFile("signin.html", { root: clientPath });
 })
 
-pages.get('/dashboard', (req, res) => {
+pages.get('/dashboard', bearerAuth, (req, res) => {
     res.sendFile("dashboard.html", { root: clientPath });
 })
 
