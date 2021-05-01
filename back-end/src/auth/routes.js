@@ -8,7 +8,6 @@ const basicAuth = require('./middleware/basic.js');
 const bearerAuth = require('./middleware/bearer.js');
 const permissions = require('./middleware/acl.js');
 
-
 authRouter.post('/signup', async (req, res, next) => {
 
   try {
@@ -18,8 +17,7 @@ authRouter.post('/signup', async (req, res, next) => {
       user: userRecord,
       token: userRecord.token
     };
-    console.log(`inside user ${output.token}`);
-    // TODO redirect to HTML
+
     res.json({
       status: "success",
       output
@@ -35,10 +33,7 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
       user: req.user,
       token: req.user.token
     };
-    // TODO redirect to HTML
-    // res.redirect("/dashboard");
 
-    
     // Sets cookie "token" as user token
     res.cookie('token', `${req.user.token}`, {
       secure: true,

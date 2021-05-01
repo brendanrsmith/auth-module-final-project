@@ -19,7 +19,7 @@ $("#signup").on("submit", function (e) {
         data: userObj,
     }).done(function (response) {
         if (response.status === "success") {
-            window.location.href = "/front-end/signin.html"
+            window.location.href = "/signin"
         }
     })
 })
@@ -42,7 +42,7 @@ $("#signin").on("submit", function (e) {
         type: "POST",
     }).done(function (response) {
         if (response.status === "success") {
-            window.location.href = "/front-end/dashboard.html"
+            window.location.href = "/dashboard"
         }
 
     })
