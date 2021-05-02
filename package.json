@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./back-end/index.js",
     "dev": "nodemon index.js",
-    "test": "jest --coverage --verbose"
+    "test": "jest --coverage --verbose",
+    "postinstall": "npm install --prefix ./back-end"
   }
 }
