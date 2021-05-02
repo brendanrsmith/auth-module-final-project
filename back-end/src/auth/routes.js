@@ -5,8 +5,6 @@ const authRouter = express.Router();
 
 const User = require('./models/users.js');
 const basicAuth = require('./middleware/basic.js');
-const bearerAuth = require('./middleware/bearer.js');
-const permissions = require('./middleware/acl.js');
 
 authRouter.post('/signup', async (req, res, next) => {
 
@@ -18,12 +16,15 @@ authRouter.post('/signup', async (req, res, next) => {
       token: userRecord.token
     };
 
-    res.json({
+    res.status(201).json({
       status: "success",
       output
     });
   } catch (e) {
-    next(e.message);
+    res.json({
+      status: "error",
+      error: e.message
+    })
   }
 });
 
@@ -35,10 +36,12 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     };
 
     // Sets cookie "token" as user token
-    res.cookie('token', `${req.user.token}`, {
+    res.cookie('token', req.user.token, {
       secure: true,
       httpOnly: true
     });
+
+    res.cookie('id', req.user._id);
 
     res.json({
       status: "success",
@@ -46,7 +49,10 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     });
 
   } catch (e) {
-    next(e.message);
+    res.json({
+      status: "error",
+      error: e.message
+    })
   }
 });
 

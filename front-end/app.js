@@ -14,12 +14,19 @@ $("#signup").on("submit", function (e) {
     }
 
     $.ajax({
-        url: "http://localhost:3000/signup",
+        url: "/signup",
         type: "POST",
         data: userObj,
     }).done(function (response) {
         if (response.status === "success") {
             window.location.href = "/signin"
+        } else {
+            if (response.error.includes('duplicate')) {
+                console.log("This user already exists!")
+            } else if (response.error.includes("validation failed")) {
+                console.log("Both fields are required");
+            }
+            console.log(response);
         }
     })
 })
@@ -35,7 +42,7 @@ $("#signin").on("submit", function (e) {
     const encoded = btoa(`${username}:${password}`);
 
     $.ajax({
-        url: "http://localhost:3000/signin",
+        url: "/signin",
         headers: {
             authorization: `Basic ${encoded}`
         },
@@ -43,7 +50,11 @@ $("#signin").on("submit", function (e) {
     }).done(function (response) {
         if (response.status === "success") {
             window.location.href = "/dashboard"
+        } else {
+            console.log(response);
         }
 
     })
-})
+});
+
+
