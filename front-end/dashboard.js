@@ -20,7 +20,7 @@ $(document).ready(function () {
         url: `/users/${id}`,
         method: "GET"
     }).done(function (response) {
-        currentUserUl.html(`<li>${response.username}</li>`);
+        currentUserUl.html(`<li clsss="userName">${response.username} with ${response.role} access</li>`);
 
         if (response.role === "admin") {
             $("#allUsers").show();
