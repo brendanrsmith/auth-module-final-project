@@ -2,7 +2,7 @@
 
 ## Authors
 
-- Jerrell Houston
+- Jarrell Houston
 - Brendan Smith
 - Dan Engel
 
