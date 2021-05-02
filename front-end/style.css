@@ -57,3 +57,20 @@ h3 {
   color: azure;
   font-size: 20px;
 }
+
+.dashboard {
+  padding: 20px; 
+}
+
+#currentUser, #allUsers {
+  color: rgb(166, 166, 166);
+  margin-bottom: 40px;
+}
+
+#allUsers li, #currentUser li {
+  padding-top: 10px;
+}
+
+#allUsers {
+  display: none;
+}

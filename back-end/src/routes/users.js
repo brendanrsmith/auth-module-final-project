@@ -15,7 +15,7 @@ users.get('/users', cookieParser, capability('read'), async (req, res) => {
         res.status(200).json(users);
     }
     catch {
-        res.status(500).json({ err: "Error Fetching Users!" });
+        res.json({ err: "Error Fetching Users!" });
     }
 })
 
@@ -26,7 +26,7 @@ users.get('/users/:id', cookieParser, capability('read'), async (req, res) => {
         const id = req.params.id;
         const user = await User.findOne({ _id: id });
         res.status(200).json(user);
-        res.send(user); //added this, Dan
+        // res.send(user); //added this, Dan
     }
     catch {
         res.status(500).json({ err: "Error Fetching User!" });
